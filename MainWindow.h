@@ -39,6 +39,10 @@ private slots:
 
     void on_radioButton_3_toggled(bool checked);
 
+    void on_pb_next_clicked();
+
+    void on_pb_prev_clicked();
+
 private:
     Ui::MainWindow *ui;
     Password passwd;

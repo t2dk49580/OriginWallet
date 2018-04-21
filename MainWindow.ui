@@ -126,7 +126,7 @@
           <item>
            <widget class="QLineEdit" name="le_url">
             <property name="text">
-             <string>118.178.127.35:3002</string>
+             <string>118.178.127.35:4002</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -284,7 +284,7 @@
          </layout>
         </item>
         <item row="0" column="1" colspan="3">
-         <widget class="QLineEdit" name="ui_querykey">
+         <widget class="QLineEdit" name="le_querykey">
           <property name="text">
            <string>0</string>
           </property>
@@ -323,6 +323,20 @@
         </item>
         <item row="3" column="0" colspan="4">
          <widget class="QTextBrowser" name="ui_databrowser"/>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="pb_next">
+          <property name="text">
+           <string>next</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pb_prev">
+          <property name="text">
+           <string>prev</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -376,7 +390,7 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QLineEdit" name="le_port">
               <property name="text">
-               <string>118.178.127.35:3002</string>
+               <string>118.178.127.35:4002</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

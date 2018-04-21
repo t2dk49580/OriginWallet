@@ -43,5 +43,3 @@ HEADERS += \
 FORMS += \
         MainWindow.ui
 
-LIBS += \
-        -lcurl

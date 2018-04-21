@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     contractHead = "_G['os'] = nil\n_G['io'] = nil\njson = require 'json'\n";
     contractBase = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\nfunction init()\nend\n";
     contractErc20 = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\ngName = 'Zero Erc20 Template'\ngSymbol = 'ZET'\ngOwner = nil\ngTotalSupply = 0\ngBalance = {}\nfunction _toJson(pKey,pVar)\n	return json.encode({f=pKey,v=pVar,u=gUser})\nend\n\nfunction init(pTotal)\n	if gOwner ~= nil then\n		return toJson('init','fail: it was init')\n	end\n	gTotalSupply = pTotal\n	gOwner = gUser\n	gBalance[gOwner] = tonumber(pTotal)\n	return _toJson('init','init finish')\nend\n\nfunction getBalanceOf(pUser)\n	if gBalance[pUser] == nil then\n		return _toJson('balanceOf',0)\n	end\n	return _toJson('balanceOf',gBalance[pUser])\nend\n\nfunction transfer(pTo,pAmount)\n	if gBalance[gUser] == nil then\n		return _toJson('transfer','sender not found')\n	end\n	if gBalance[pTo] == nil then\n		gBalance[pTo] = 0\n	end\n	local curAmount = tonumber(pAmount)\n	if curAmount <= 0 then\n		return _toJson('transfer','curAmount <= 0')\n	end\n	if gBalance[gUser] < curAmount then\n		return _toJson('transfer','sender amount not enough')\n	end\n	gBalance[gUser] = gBalance[gUser] - curAmount\n	gBalance[pTo] = gBalance[pTo] + curAmount\n	return json.encode({sender=gUser,senderBalance=gBalance[gUser],reciver=pTo,reciverBlance=gBalance[pTo]})\nend";
-    rc = new Reciver(ui->le_url->text().split(":").first()+":3003");
+    rc = new Reciver(ui->le_url->text().split(":").first()+":4003");
     QObject::connect(rc,SIGNAL(toWindow(QJsonObject)),this,SLOT(onMessage(QJsonObject)),Qt::QueuedConnection);
     //ui->lbAccount->setStyleSheet("background-color:red");
     if(!passwd.hasAppkey()){
@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             exit(-1);
         QStringList arg;
         arg.append(GETADDR(QByteArray::fromHex(passwd.pubkey)));
-        QJsonObject jsonObj = HttpRequest::doMethodGet(passwd,ui->le_url->text().split(":").first()+":3001",ui->le_contract->text(),"getBalanceOf",arg);
+        QJsonObject jsonObj = HttpRequest::doMethodGet(passwd,ui->le_url->text().split(":").first()+":4001",ui->le_contract->text(),"getBalanceOf",arg);
         ui->lb_zero->display(QString::number(jsonObj["v"].toDouble()));
     }
     ui->lb_pubkey->setText(GETADDR(QByteArray::fromHex(passwd.pubkey)));
@@ -74,7 +74,7 @@ void MainWindow::onMessage(QJsonObject pObj){
 }
 
 void MainWindow::on_ui_query_clicked(){
-    QByteArray result = HttpRequest::get(QByteArray("http://118.178.127.35:3001/block")+ui->ui_querykey->text().toLatin1());
+    QByteArray result = HttpRequest::qtGet(QByteArray(QString(ui->le_url->text().split(":").first()+":4001/block").toLatin1())+ui->le_querykey->text().toLatin1());
     QList<QByteArray> data = result.split('@');
     ui->ui_databrowser->clear();
     if(data.count()>=5){
@@ -134,4 +134,17 @@ void MainWindow::on_radioButton_3_toggled(bool checked){
     if(checked){
         ui->te_code->setText(contractErc20);
     }
+}
+
+void MainWindow::on_pb_next_clicked(){
+    ui->le_querykey->setText(QString::number(ui->le_querykey->text().toInt()+1));
+    on_ui_query_clicked();
+}
+
+void MainWindow::on_pb_prev_clicked(){
+    if(ui->le_querykey->text()=="0"){
+        return;
+    }
+    ui->le_querykey->setText(QString::number(ui->le_querykey->text().toInt()-1));
+    on_ui_query_clicked();
 }

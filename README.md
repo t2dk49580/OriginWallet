@@ -1,8 +1,7 @@
-# OriginWallet
+# ZeroWallet
 
 depense:
 Qt 5.10
-libcurl
 
 windows release bin
-http://note.youdao.com/noteshare?id=226af3cdc9a30cb4ad5f6326f6537a49
+https://note.youdao.com/share/?id=bbf980ce5aed24c1f3cace5da9ae0724&type=note#/

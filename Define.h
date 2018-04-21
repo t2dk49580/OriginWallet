@@ -14,6 +14,7 @@
 #include <QJsonArray>
 #include <QCryptographicHash>
 #include <QNetworkReply>
+#include <QUrlQuery>
 
 #define BUG qDebug()<<__FUNCTION__<<__LINE__
 #define SETXF(A,B) QString("%1").arg(A, 0, 'f', B)
