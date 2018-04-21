@@ -4,4 +4,4 @@ depense:
 Qt 5.10
 
 windows release bin
-https://note.youdao.com/share/?id=bbf980ce5aed24c1f3cace5da9ae0724&type=note#/
+http://note.youdao.com/noteshare?id=7730d83d4d50a292caff159b61bc05cb
