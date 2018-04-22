@@ -43,3 +43,8 @@ HEADERS += \
 FORMS += \
         MainWindow.ui
 
+TRANSLATIONS += \
+        wallet.ts
+
+RESOURCES += \
+    wallet.qrc

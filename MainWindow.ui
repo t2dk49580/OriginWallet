@@ -414,10 +414,13 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QLineEdit" name="le_name">
               <property name="text">
-               <string>contract</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="placeholderText">
+               <string>contract name</string>
               </property>
              </widget>
             </item>
@@ -438,10 +441,13 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QLineEdit" name="le_argment">
               <property name="text">
-               <string>100</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="placeholderText">
+               <string>argment</string>
               </property>
              </widget>
             </item>
@@ -513,6 +519,9 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QLineEdit" name="le_method_contract">
               <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
                <string>contract name</string>
               </property>
              </widget>
@@ -538,6 +547,9 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QLineEdit" name="le_method">
               <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
                <string>method name</string>
               </property>
              </widget>
@@ -548,12 +560,30 @@ p, li { white-space: pre-wrap; }
         </item>
         <item row="1" column="0" rowspan="2">
          <widget class="QTextEdit" name="te_arg">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="accessibleDescription">
+           <string/>
+          </property>
+          <property name="documentTitle">
+           <string/>
+          </property>
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;method argment&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="placeholderText">
+           <string>argment</string>
           </property>
          </widget>
         </item>
@@ -631,7 +661,10 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;network reply&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="placeholderText">
+           <string>network reply</string>
           </property>
          </widget>
         </item>
