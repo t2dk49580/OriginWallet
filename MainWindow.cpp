@@ -172,7 +172,7 @@ void MainWindow::on_pushButton_2_clicked(){
             arg.append(code.toLatin1().toHex());
         }
     }
-    HttpRequest::doMethodSet(passwd,ui->le_method_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
+    HttpRequest::doMethodSet(passwd,ui->le_set_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
 }
 
 void MainWindow::on_pushButton_3_clicked(){
@@ -198,7 +198,7 @@ void MainWindow::on_pushButton_3_clicked(){
             arg.append(code.toLatin1().toHex());
         }
     }
-    HttpRequest::doMethodGet(passwd,ui->le_method_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
+    HttpRequest::doMethodGet(passwd,ui->le_get_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
 }
 
 
