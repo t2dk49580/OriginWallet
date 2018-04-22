@@ -17,7 +17,7 @@
         <location filename="MainWindow.ui" line="39"/>
         <location filename="MainWindow.ui" line="313"/>
         <source>address</source>
-        <translation type="unfinished">收款地址</translation>
+        <translation type="unfinished">账户地址</translation>
     </message>
     <message>
         <location filename="MainWindow.ui" line="66"/>
@@ -37,13 +37,12 @@
     <message>
         <location filename="MainWindow.ui" line="129"/>
         <location filename="MainWindow.ui" line="393"/>
-        <location filename="MainWindow.ui" line="534"/>
+        <location filename="MainWindow.ui" line="543"/>
         <source>118.178.127.35:4002</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="MainWindow.ui" line="149"/>
-        <location filename="MainWindow.ui" line="417"/>
         <source>contract</source>
         <translation type="unfinished">合约名称</translation>
     </message>
@@ -151,6 +150,8 @@
     </message>
     <message>
         <location filename="MainWindow.ui" line="368"/>
+        <location filename="MainWindow.ui" line="579"/>
+        <location filename="MainWindow.ui" line="660"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -169,106 +170,107 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">合约名称</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="431"/>
+        <location filename="MainWindow.ui" line="434"/>
+        <location filename="MainWindow.ui" line="450"/>
+        <location filename="MainWindow.ui" line="586"/>
         <source>argment</source>
         <translation type="unfinished">合约参数</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="441"/>
-        <source>100</source>
+        <location filename="MainWindow.ui" line="667"/>
+        <source>network reply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="463"/>
+        <location filename="MainWindow.ui" line="469"/>
         <source>margin</source>
         <translation type="unfinished">保证金</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="484"/>
+        <location filename="MainWindow.ui" line="490"/>
         <source>Deploy</source>
         <translation type="unfinished">部署</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="492"/>
+        <location filename="MainWindow.ui" line="498"/>
         <source>method</source>
         <translation type="unfinished">调用合约</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="502"/>
+        <location filename="MainWindow.ui" line="508"/>
         <source>MethodGet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="509"/>
+        <location filename="MainWindow.ui" line="515"/>
         <source>118.178.127.35:4001</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="516"/>
+        <location filename="MainWindow.ui" line="423"/>
+        <location filename="MainWindow.ui" line="525"/>
         <source>contract name</source>
         <translation type="unfinished">合约名称</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="527"/>
+        <location filename="MainWindow.ui" line="536"/>
         <source>MethodSet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="541"/>
+        <location filename="MainWindow.ui" line="553"/>
         <source>method name</source>
         <translation type="unfinished">函数名称</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="552"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;method argment&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;函数参数&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="565"/>
+        <location filename="MainWindow.ui" line="595"/>
         <source>argment type</source>
         <translation type="unfinished">参数类型</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="574"/>
+        <location filename="MainWindow.ui" line="604"/>
         <source>normal</source>
         <translation type="unfinished">普通</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="584"/>
+        <location filename="MainWindow.ui" line="614"/>
         <source>hex</source>
         <translation type="unfinished">16进制</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="597"/>
+        <location filename="MainWindow.ui" line="627"/>
         <source>method type</source>
         <translation type="unfinished">函数类型</translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="612"/>
+        <location filename="MainWindow.ui" line="642"/>
         <source>Set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="619"/>
+        <location filename="MainWindow.ui" line="649"/>
         <source>Get</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="MainWindow.ui" line="630"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;network reply&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
