@@ -104,6 +104,9 @@ public:
         QJsonDocument jsonDoc = QJsonDocument::fromJson(result);
         QJsonObject   jsonObj = jsonDoc.object();
         BUG << jsonObj;
+        if(jsonObj.isEmpty() && !result.isEmpty()){
+            jsonObj.insert("result",QJsonValue(QString(result)));
+        }
         return jsonObj;
     }
 

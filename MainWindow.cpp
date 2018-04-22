@@ -71,6 +71,8 @@ void MainWindow::onMessage(QJsonObject pObj){
             }
         }
     }
+    QJsonDocument pDoc(pObj);
+    ui->tb_network->append(QString(pDoc.toJson()).remove("\\"));
 }
 
 void MainWindow::on_ui_query_clicked(){
@@ -198,7 +200,9 @@ void MainWindow::on_pushButton_3_clicked(){
             arg.append(code.toLatin1().toHex());
         }
     }
-    HttpRequest::doMethodGet(passwd,ui->le_get_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
+    auto pObj = HttpRequest::doMethodGet(passwd,ui->le_get_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
+    QJsonDocument pDoc(pObj);
+    ui->tb_network->append(QString(pDoc.toJson()).remove("\\"));
 }
 
 

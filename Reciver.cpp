@@ -14,6 +14,9 @@ void Reciver::onText(QString pMsg){
     QJsonDocument jsonDoc = QJsonDocument::fromJson(pMsg.toLatin1());
     QJsonObject   jsonObj = jsonDoc.object();
     BUG << jsonObj;
+    if(jsonObj.isEmpty() && !pMsg.isEmpty()){
+        jsonObj.insert("result",QJsonValue(pMsg));
+    }
     emit toWindow(jsonObj);
 }
 
