@@ -108,12 +108,12 @@ public:
     }
 
     static QByteArray doMethodSet(Password &psd,QString url,QString pContract,QString pMethod,QStringList pArg){
-        BUG;
         QString arg;
         for(auto cur:pArg)
             arg.append(cur).append("?");
         arg.remove(arg.count()-1,1);
         QString block = docmd("method",psd.pubkey,psd.prikey,pContract,pMethod,arg);
+        BUG << block;
         return qtGet(url+"/"+block);
     }
 

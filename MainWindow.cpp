@@ -148,3 +148,38 @@ void MainWindow::on_pb_prev_clicked(){
     ui->le_querykey->setText(QString::number(ui->le_querykey->text().toInt()-1));
     on_ui_query_clicked();
 }
+
+void MainWindow::on_pushButton_2_clicked(){
+    QString code = ui->te_arg->toPlainText();
+    while((int)code.at(code.count()-1).toLatin1() <= 10){
+        code.remove(code.count()-1,1);
+    }
+    QStringList arg;
+    if(ui->rb_normal->isChecked()){
+        if(code.contains("?")){
+            arg = code.split("?");
+        }else{
+            arg.append(code);
+        }
+    }
+    if(ui->rb_hex->isChecked()){
+        if(code.contains("?")){
+            QStringList curCode = code.split("?");
+            for(auto cur:curCode){
+                arg.append(cur.toLatin1().toHex());
+            }
+        }else{
+            arg.append(code.toLatin1().toHex());
+        }
+    }
+    HttpRequest::doMethodSet(passwd,ui->le_method_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
+}
+
+
+
+
+
+
+
+
+
