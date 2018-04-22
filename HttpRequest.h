@@ -94,12 +94,12 @@ public:
     }
 
     static QJsonObject doMethodGet(Password &psd,QString url,QString pContract,QString pMethod,QStringList pArg){
-        BUG;
         QString arg;
         for(auto cur:pArg)
             arg.append(cur).append("?");
         arg.remove(arg.count()-1,1);
         QString block = pContract+"$"+pMethod+"$"+arg+"$"+psd.pubkey;
+        BUG << block;
         QByteArray result = qtGet(url+"/"+block);
         QJsonDocument jsonDoc = QJsonDocument::fromJson(result);
         QJsonObject   jsonObj = jsonDoc.object();

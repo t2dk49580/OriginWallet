@@ -524,14 +524,14 @@ p, li { white-space: pre-wrap; }
        <widget class="QPushButton" name="pushButton_2">
         <property name="geometry">
          <rect>
-          <x>540</x>
+          <x>500</x>
           <y>330</y>
           <width>89</width>
           <height>25</height>
          </rect>
         </property>
         <property name="text">
-         <string>submit</string>
+         <string>Set</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="le_method_contract">
@@ -587,6 +587,19 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="text">
          <string>118.178.127.35:4002</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>600</x>
+          <y>330</y>
+          <width>89</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Get</string>
         </property>
        </widget>
       </widget>
