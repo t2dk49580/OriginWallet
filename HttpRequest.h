@@ -93,7 +93,7 @@ public:
         return block;
     }
 
-    static QJsonObject doMethodGet(Password &psd,QString url,QString pContract,QString pMethod,QStringList pArg){
+    static QJsonArray doMethodGet(Password &psd,QString url,QString pContract,QString pMethod,QStringList pArg){
         QString arg;
         for(auto cur:pArg)
             arg.append(cur).append("?");
@@ -102,12 +102,9 @@ public:
         BUG << block;
         QByteArray result = qtGet(url+"/"+block);
         QJsonDocument jsonDoc = QJsonDocument::fromJson(result);
-        QJsonObject   jsonObj = jsonDoc.object();
-        BUG << jsonObj;
-        if(jsonObj.isEmpty() && !result.isEmpty()){
-            jsonObj.insert("result",QJsonValue(QString(result)));
-        }
-        return jsonObj;
+        QJsonArray    jsonArr = jsonDoc.array();
+        BUG << jsonArr;
+        return jsonArr;
     }
 
     static QByteArray doMethodSet(Password &psd,QString url,QString pContract,QString pMethod,QStringList pArg){

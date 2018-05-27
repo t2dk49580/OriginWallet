@@ -7,11 +7,11 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QWidget>
+#include <QUdpSocket>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
     QTranslator traslator;
     traslator.load(":/wallet.qm");
     a.installTranslator(&traslator);

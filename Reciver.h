@@ -12,10 +12,14 @@ public:
 
     QWebSocket ws;
 signals:
-    void toWindow(QJsonObject);
+    void toWindow(QJsonArray);
 public slots:
     void onConn();
     void onText(QString);
+    void onUpdBroad();
+    void onUdpConn();
+private:
+    QUdpSocket socketBroad;
 };
 
 #endif // RECIVER_H

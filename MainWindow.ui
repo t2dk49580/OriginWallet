@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1287</width>
     <height>600</height>
    </rect>
   </property>
@@ -71,7 +71,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QLCDNumber" name="lb_zero"/>
+           <widget class="QLCDNumber" name="lcd_onn">
+            <property name="digitCount">
+             <number>20</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -156,7 +160,7 @@
           <item>
            <widget class="QLineEdit" name="le_contract">
             <property name="text">
-             <string>zc</string>
+             <string>ONN</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -186,7 +190,7 @@
           <item>
            <widget class="QLineEdit" name="le_number">
             <property name="text">
-             <string>1</string>
+             <string>0</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -639,14 +643,7 @@ p, li { white-space: pre-wrap; }
                </size>
               </property>
               <property name="text">
-               <string>Set</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_3">
-              <property name="text">
-               <string>Get</string>
+               <string>Send</string>
               </property>
              </widget>
             </item>
@@ -679,7 +676,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1287</width>
      <height>28</height>
     </rect>
    </property>

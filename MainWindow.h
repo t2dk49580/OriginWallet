@@ -24,7 +24,7 @@ public:
     bool checkAppkey();
 
 public slots:
-    void onMessage(QJsonObject);
+    void onMessage(QJsonArray);
 
 private slots:
     void on_ui_query_clicked();
@@ -44,8 +44,6 @@ private slots:
     void on_pb_prev_clicked();
 
     void on_pushButton_2_clicked();
-
-    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;

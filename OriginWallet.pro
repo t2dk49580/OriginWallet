@@ -38,7 +38,15 @@ HEADERS += \
     emcc/uECC.h \
     Password.h \
     aes/aes.h \
-    Reciver.h
+    Reciver.h \
+    emcc/asm_arm.inc \
+    emcc/asm_arm_mult_square.inc \
+    emcc/asm_arm_mult_square_umaal.inc \
+    emcc/asm_avr.inc \
+    emcc/asm_avr_mult_square.inc \
+    emcc/curve-specific.inc \
+    emcc/platform-specific.inc \
+    emcc/uECC_vli.h
 
 FORMS += \
         MainWindow.ui
