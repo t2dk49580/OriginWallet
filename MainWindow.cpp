@@ -5,7 +5,79 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     contractHead = "_G['os'] = nil\n_G['io'] = nil\njson = require 'json'\n";
     contractBase = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\nfunction init()\nend\n";
-    contractErc20 = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\ngName = 'Zero Erc20 Template'\ngSymbol = 'ZET'\ngOwner = nil\ngTotalSupply = 0\ngBalance = {}\nfunction _toJson(pKey,pVar)\n	return json.encode({f=pKey,v=pVar,u=gUser})\nend\n\nfunction init(pTotal)\n	if gOwner ~= nil then\n		return toJson('init','fail: it was init')\n	end\n	gTotalSupply = pTotal\n	gOwner = gUser\n	gBalance[gOwner] = tonumber(pTotal)\n	return _toJson('init','init finish')\nend\n\nfunction getBalanceOf(pUser)\n	if gBalance[pUser] == nil then\n		return _toJson('balanceOf',0)\n	end\n	return _toJson('balanceOf',gBalance[pUser])\nend\n\nfunction transfer(pTo,pAmount)\n	if gBalance[gUser] == nil then\n		return _toJson('transfer','sender not found')\n	end\n	if gBalance[pTo] == nil then\n		gBalance[pTo] = 0\n	end\n	local curAmount = tonumber(pAmount)\n	if curAmount <= 0 then\n		return _toJson('transfer','curAmount <= 0')\n	end\n	if gBalance[gUser] < curAmount then\n		return _toJson('transfer','sender amount not enough')\n	end\n	gBalance[gUser] = gBalance[gUser] - curAmount\n	gBalance[pTo] = gBalance[pTo] + curAmount\n	return json.encode({sender=gUser,senderBalance=gBalance[gUser],reciver=pTo,reciverBlance=gBalance[pTo]})\nend";
+    //contractErc20 = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\ngName = 'Zero Erc20 Template'\ngSymbol = 'ZET'\ngOwner = nil\ngTotalSupply = 0\ngBalance = {}\nfunction _toJson(pKey,pVar)\n	return json.encode({f=pKey,v=pVar,u=gUser})\nend\n\nfunction init(pTotal)\n	if gOwner ~= nil then\n		return toJson('init','fail: it was init')\n	end\n	gTotalSupply = pTotal\n	gOwner = gUser\n	gBalance[gOwner] = tonumber(pTotal)\n	return _toJson('init','init finish')\nend\n\nfunction getBalanceOf(pUser)\n	if gBalance[pUser] == nil then\n		return _toJson('balanceOf',0)\n	end\n	return _toJson('balanceOf',gBalance[pUser])\nend\n\nfunction transfer(pTo,pAmount)\n	if gBalance[gUser] == nil then\n		return _toJson('transfer','sender not found')\n	end\n	if gBalance[pTo] == nil then\n		gBalance[pTo] = 0\n	end\n	local curAmount = tonumber(pAmount)\n	if curAmount <= 0 then\n		return _toJson('transfer','curAmount <= 0')\n	end\n	if gBalance[gUser] < curAmount then\n		return _toJson('transfer','sender amount not enough')\n	end\n	gBalance[gUser] = gBalance[gUser] - curAmount\n	gBalance[pTo] = gBalance[pTo] + curAmount\n	return json.encode({sender=gUser,senderBalance=gBalance[gUser],reciver=pTo,reciverBlance=gBalance[pTo]})\nend";
+    contractErc20 = ""
+"_G['os'] = nil\n\
+_G['io'] = nil\n\
+json = require 'json'\n\
+gUser = nil\n\
+gName    = 'Erc20 Template Token'\n\
+gSymbol  = 'ETT'\n\
+gBalance = {}\n\
+gTotal   = 70000000000\n\
+gOwner   = nil\n\
+function setUser(pUser)\n\
+    gUser = pUser\n\
+end\n\
+function _addResult(pUser,pMethod,pResult,pMsg,pAll)\n\
+    local buffer = {}\n\
+    local result = pAll\n\
+    buffer['method'] = pMethod\n\
+    buffer['result'] = pResult\n\
+    buffer['msg']    = pMsg\n\
+    buffer['owner']  = pUser\n\
+    table.insert(result,buffer)\n\
+    return result\n\
+end\n\
+function _getResult(pUser,pMethod,pResult,pMsg)\n\
+    local buffer = {}\n\
+    local result = _addResult(pUser,pMethod,pResult,pMsg,buffer)\n\
+    return json.encode(result)\n\
+end\n\
+function init()\n\
+    if gOwner ~= nil then\n\
+        return 'fail'\n\
+    end\n\
+    gOwner = gUser\n\
+    gBalance[gUser] = gTotal\n\
+    return _getResult(gUser,'init',true,'ok')\n\
+end\n\
+function getSymbol()\n\
+    return _getResult(gUser,'getSymbol',true,gSymbol)\n\
+end\n\
+function getTotalSupply()\n\
+    return _getResult(gUser,'getTotalSupply',true,gTotal)\n\
+end\n\
+function getName()\n\
+    return _getResult(gUser,'getName',true,gName)\n\
+end\n\
+function getBalanceOf(pUser)\n\
+    if gBalance[pUser] == nil then\n\
+        return _getResult(gUser,'getBalanceOf',true,0)\n\
+    end\n\
+    return _getResult(gUser,'getBalanceOf',true,gBalance[pUser])\n\
+end\n\
+function transfer(pTo,pAmount)\n\
+    local curAmount = tonumber(pAmount)\n\
+    if curAmount <= 0 then\n\
+        return 'fail'\n\
+    end\n\
+    if gBalance[gUser] < curAmount then\n\
+        return 'fail'\n\
+    end\n\
+    if gBalance[pTo] == nil then\n\
+        gBalance[pTo] = 0\n\
+    end\n\
+    local curResult = {}\n\
+    gBalance[gUser] = gBalance[gUser] - curAmount\n\
+    gBalance[pTo] = gBalance[pTo] + curAmount\n\
+    _addResult(gUser,'transfer',true,gBalance[gUser],curResult)\n\
+    _addResult(pTo,'transfer',true,gBalance[pTo],curResult)\n\
+    return json.encode(curResult)\n\
+end";
+
+
+
     rc = new Reciver(ui->le_url->text().split(":").first()+":4003");
     QObject::connect(rc,SIGNAL(toWindow(QJsonArray)),this,SLOT(onMessage(QJsonArray)),Qt::QueuedConnection);
     //ui->lbAccount->setStyleSheet("background-color:red");
