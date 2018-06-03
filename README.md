@@ -1,6 +1,6 @@
 # OriginWallet windows release bin
 
-# depense: Qt 5.10
+# depense: Qt 5.11.0
 
 # v0.22
     http://note.youdao.com/noteshare?id=90c43bb0cab79c3e5f557f66ff0e5d33
