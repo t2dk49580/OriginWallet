@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1287</width>
+    <width>789</width>
     <height>600</height>
    </rect>
   </property>
@@ -130,7 +130,7 @@
           <item>
            <widget class="QLineEdit" name="le_url">
             <property name="text">
-             <string>118.178.127.35:4002</string>
+             <string>118.178.127.35:6000</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -394,7 +394,7 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QLineEdit" name="le_port">
               <property name="text">
-               <string>118.178.127.35:4002</string>
+               <string>118.178.127.35:6002</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -516,7 +516,7 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QLineEdit" name="le_get_url">
               <property name="text">
-               <string>118.178.127.35:4001</string>
+               <string>118.178.127.35:6001</string>
               </property>
              </widget>
             </item>
@@ -544,7 +544,7 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QLineEdit" name="le_set_url">
               <property name="text">
-               <string>118.178.127.35:4002</string>
+               <string>118.178.127.35:6002</string>
               </property>
              </widget>
             </item>
@@ -562,7 +562,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="1" column="0" rowspan="2">
+        <item row="1" column="0">
          <widget class="QTextEdit" name="te_arg">
           <property name="toolTip">
            <string/>
@@ -592,66 +592,19 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item row="1" column="1">
-         <layout class="QVBoxLayout" name="verticalLayout_15">
-          <item>
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string>argment type</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QRadioButton" name="rb_normal">
-              <property name="text">
-               <string>normal</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="rb_hex">
-              <property name="text">
-               <string>hex</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>180</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Send</string>
+          </property>
+         </widget>
         </item>
-        <item row="2" column="1">
-         <layout class="QVBoxLayout" name="verticalLayout_16">
-          <item>
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>method type</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <item>
-             <widget class="QPushButton" name="pushButton_2">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Send</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item row="3" column="0" colspan="2">
+        <item row="2" column="0" colspan="2">
          <widget class="QTextBrowser" name="tb_network">
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -676,7 +629,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1287</width>
+     <width>789</width>
      <height>28</height>
     </rect>
    </property>

@@ -44,8 +44,8 @@ private slots:
     void on_pb_prev_clicked();
 
     void on_pushButton_2_clicked();
-
 private:
+    int basePort;
     Ui::MainWindow *ui;
     Password passwd;
     Reciver *rc;

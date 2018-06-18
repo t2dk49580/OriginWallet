@@ -93,12 +93,8 @@ public:
         return block;
     }
 
-    static QJsonArray doMethodGet(Password &psd,QString url,QString pContract,QString pMethod,QStringList pArg){
-        QString arg;
-        for(auto cur:pArg)
-            arg.append(cur).append("?");
-        arg.remove(arg.count()-1,1);
-        QString block = pContract+"$"+pMethod+"$"+arg+"$"+psd.pubkey;
+    static QJsonArray doMethodGet(Password &psd,QString url,QString pContract,QString pMethod,QString pArg){
+        QString block = pContract+"$"+pMethod+"$"+pArg+"$"+psd.pubkey;
         BUG << block;
         QByteArray result = qtGet(url+"/"+block);
         QJsonDocument jsonDoc = QJsonDocument::fromJson(result);
@@ -107,23 +103,15 @@ public:
         return jsonArr;
     }
 
-    static QByteArray doMethodSet(Password &psd,QString url,QString pContract,QString pMethod,QStringList pArg){
-        QString arg;
-        for(auto cur:pArg)
-            arg.append(cur).append("?");
-        arg.remove(arg.count()-1,1);
-        QString block = docmd("method",psd.pubkey,psd.prikey,pContract,pMethod,arg);
-        BUG << block;
+    static QByteArray doMethodSet(Password &psd,QString url,QString pContract,QString pMethod,QString pArg){
+        QString block = docmd("method",psd.pubkey,psd.prikey,pContract,pMethod,pArg);
+        BUG << url << block;
         return qtGet(url+"/"+block);
     }
 
-    static QByteArray doDeploy(Password &psd,QString url,QString pContract,QString pCode,QStringList pArg){
+    static QByteArray doDeploy(Password &psd,QString url,QString pContract,QString pCode,QString pArg){
         BUG;
-        QString arg;
-        for(auto cur:pArg)
-            arg.append(cur).append("?");
-        arg.remove(arg.count()-1,1);
-        QString block = docmd("deploy",psd.pubkey,psd.prikey,pContract,pCode,arg);
+        QString block = docmd("deploy",psd.pubkey,psd.prikey,pContract,pCode,pArg);
         return qtPost(url,block.toLatin1());
     }
 };

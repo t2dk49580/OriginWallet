@@ -3,6 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
+    basePort = ui->le_url->text().split(":").last().toInt();
     contractHead = "_G['os'] = nil\n_G['io'] = nil\njson = require 'json'\n";
     contractBase = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\nfunction init()\nend\n";
     //contractErc20 = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\ngName = 'Zero Erc20 Template'\ngSymbol = 'ZET'\ngOwner = nil\ngTotalSupply = 0\ngBalance = {}\nfunction _toJson(pKey,pVar)\n	return json.encode({f=pKey,v=pVar,u=gUser})\nend\n\nfunction init(pTotal)\n	if gOwner ~= nil then\n		return toJson('init','fail: it was init')\n	end\n	gTotalSupply = pTotal\n	gOwner = gUser\n	gBalance[gOwner] = tonumber(pTotal)\n	return _toJson('init','init finish')\nend\n\nfunction getBalanceOf(pUser)\n	if gBalance[pUser] == nil then\n		return _toJson('balanceOf',0)\n	end\n	return _toJson('balanceOf',gBalance[pUser])\nend\n\nfunction transfer(pTo,pAmount)\n	if gBalance[gUser] == nil then\n		return _toJson('transfer','sender not found')\n	end\n	if gBalance[pTo] == nil then\n		gBalance[pTo] = 0\n	end\n	local curAmount = tonumber(pAmount)\n	if curAmount <= 0 then\n		return _toJson('transfer','curAmount <= 0')\n	end\n	if gBalance[gUser] < curAmount then\n		return _toJson('transfer','sender amount not enough')\n	end\n	gBalance[gUser] = gBalance[gUser] - curAmount\n	gBalance[pTo] = gBalance[pTo] + curAmount\n	return json.encode({sender=gUser,senderBalance=gBalance[gUser],reciver=pTo,reciverBlance=gBalance[pTo]})\nend";
@@ -76,9 +77,7 @@ function transfer(pTo,pAmount)\n\
     return json.encode(curResult)\n\
 end";
 
-
-
-    rc = new Reciver(ui->le_url->text().split(":").first()+":4003");
+    rc = new Reciver(ui->le_url->text().split(":").first()+":"+QString::number(basePort+3));
     QObject::connect(rc,SIGNAL(toWindow(QJsonArray)),this,SLOT(onMessage(QJsonArray)),Qt::QueuedConnection);
     //ui->lbAccount->setStyleSheet("background-color:red");
     if(!passwd.hasAppkey()){
@@ -86,10 +85,7 @@ end";
     }else{
         if(!checkAppkey())
             exit(-1);
-        QStringList arg;
-        //arg.append(GETADDR(QByteArray::fromHex(passwd.pubkey)));
-        arg.append(passwd.pubkey);
-        QJsonArray jsonArr = HttpRequest::doMethodGet(passwd,ui->le_url->text().split(":").first()+":4001",ui->le_contract->text(),"getBalanceOf",arg);
+        QJsonArray jsonArr = HttpRequest::doMethodGet(passwd,ui->le_url->text().split(":").first()+":"+QString::number(basePort+1),ui->le_contract->text(),"getBalanceOf",GETADDR(passwd.pubkey).toHex());
         if(jsonArr.count()>0){
             ui->lcd_onn->display(SETXF(jsonArr.at(0).toObject()["msg"].toDouble(),2));
         }
@@ -98,8 +94,8 @@ end";
     }
     //ui->lb_pubkey->setText(GETADDR(QByteArray::fromHex(passwd.pubkey)));
     //ui->le_addr->setText(GETADDR(QByteArray::fromHex(passwd.pubkey)));
-    ui->lb_pubkey->setText(passwd.pubkey);
-    ui->le_addr->setText(passwd.pubkey);
+    ui->lb_pubkey->setText(GETADDR(passwd.pubkey));
+    ui->le_addr->setText(GETADDR(passwd.pubkey));
     ui->te_code->setText(contractBase);
 }
 
@@ -145,11 +141,17 @@ void MainWindow::onMessage(QJsonArray pArr){
                 ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),2));
             }
         }
+        if(obj["method"] == "init"){
+            if(obj["owner"] == ui->lb_pubkey->text()){
+                if(obj["symbol"] == "ONN")
+                    ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),2));
+            }
+        }
     }
 }
 
 void MainWindow::on_ui_query_clicked(){
-    QByteArray result = HttpRequest::qtGet(QByteArray(QString(ui->le_url->text().split(":").first()+":4001/block").toLatin1())+ui->le_querykey->text().toLatin1());
+    QByteArray result = HttpRequest::qtGet(QByteArray(QString(ui->le_url->text().split(":").first()+":"+QString::number(basePort+1)+"/block").toLatin1())+ui->le_querykey->text().toLatin1());
     QList<QByteArray> data = result.split('@');
     ui->ui_databrowser->clear();
     if(data.count()>=5){
@@ -164,14 +166,15 @@ void MainWindow::on_ui_query_clicked(){
 }
 
 void MainWindow::on_pushButton_clicked(){
-    QStringList arg;
+    QString arg;
     arg.append(ui->le_addr->text());
+    arg.append("?");
     arg.append(ui->le_number->text());
-    HttpRequest::doMethodSet(passwd,ui->le_url->text(),ui->le_contract->text(),"transfer",arg);
+    HttpRequest::doMethodSet(passwd,ui->le_url->text().split(":").first()+":"+QString::number(basePort+2),ui->le_contract->text(),"transfer",arg.toLatin1().toHex());
 }
 
 void MainWindow::on_pb_deploy_clicked(){
-    QStringList arg;
+    QString arg;
     arg.append(ui->le_argment->text());
     QString code = ui->te_code->toPlainText();
     while((int)code.at(code.count()-1).toLatin1() <= 10){
@@ -190,7 +193,7 @@ void MainWindow::on_pb_deploy_clicked(){
         BUG << "do not use require in custom program";
         return;
     }
-    HttpRequest::doDeploy(passwd,ui->le_port->text()+"/deploy",ui->le_name->text(),code.toLatin1().toHex(),arg);
+    HttpRequest::doDeploy(passwd,ui->le_port->text()+"/deploy",ui->le_name->text(),code.toLatin1().toHex(),arg.toLatin1().toHex());
 }
 
 void MainWindow::on_te_code_textChanged(){
@@ -229,24 +232,7 @@ void MainWindow::on_pushButton_2_clicked(){
     while((int)code.at(code.count()-1).toLatin1() <= 10){
         code.remove(code.count()-1,1);
     }
-    QStringList arg;
-    if(ui->rb_normal->isChecked()){
-        if(code.contains("?")){
-            arg = code.split("?");
-        }else{
-            arg.append(code);
-        }
-    }
-    if(ui->rb_hex->isChecked()){
-        if(code.contains("?")){
-            QStringList curCode = code.split("?");
-            for(auto cur:curCode){
-                arg.append(cur.toLatin1().toHex());
-            }
-        }else{
-            arg.append(code.toLatin1().toHex());
-        }
-    }
+    QString arg = code.toLatin1().toHex();
     if(ui->le_method->text().left(3)=="get"){
         auto pArr = HttpRequest::doMethodGet(passwd,ui->le_get_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
         QJsonDocument pDoc(pArr);
