@@ -242,7 +242,21 @@ void MainWindow::on_pushButton_2_clicked(){
     }
 }
 
+void MainWindow::on_pb_image_clicked(){
+    if(ui->le_image->text().isEmpty()){
+        return;
+    }
+    ui->tb_image->clear();
+    if(!QFile::exists(ui->le_image->text())){
+        ui->tb_image->append("image not found");
+        return;
+    }
+    QImage img(ui->le_image->text());
+    QByteArray imgData;
+    QBuffer imgbuffer;
 
-
-
-
+    imgbuffer.open(QIODevice::WriteOnly);
+    img.save(&imgbuffer,"PNG");
+    imgData = imgbuffer.data().toHex();
+    ui->tb_image->append(imgData);
+}

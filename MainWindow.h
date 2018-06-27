@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QInputDialog>
+#include <QImage>
+#include <QFile>
 #include "HttpRequest.h"
 #include "Password.h"
 #include "Reciver.h"
@@ -44,6 +46,8 @@ private slots:
     void on_pb_prev_clicked();
 
     void on_pushButton_2_clicked();
+    void on_pb_image_clicked();
+
 private:
     int basePort;
     Ui::MainWindow *ui;

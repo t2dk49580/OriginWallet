@@ -17,6 +17,7 @@
 #include <QUrlQuery>
 #include <QUdpSocket>
 #include <QNetworkDatagram>
+#include <QImage>
 
 #define BUG qDebug()<<__FUNCTION__<<__LINE__
 #define SETXF(A,B) QString("%1").arg(A, 0, 'f', B)
