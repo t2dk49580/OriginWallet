@@ -77,7 +77,7 @@ function transfer(pTo,pAmount)\n\
     return json.encode(curResult)\n\
 end";
 
-    rc = new Reciver(ui->le_url->text().split(":").first()+":"+QString::number(basePort+3));
+    rc = new Reciver(ui->le_url->text().split(":").first()+":"+QString::number(basePort+1));
     QObject::connect(rc,SIGNAL(toWindow(QJsonArray)),this,SLOT(onMessage(QJsonArray)),Qt::QueuedConnection);
     //ui->lbAccount->setStyleSheet("background-color:red");
     if(!passwd.hasAppkey()){
@@ -85,9 +85,9 @@ end";
     }else{
         if(!checkAppkey())
             exit(-1);
-        QJsonArray jsonArr = HttpRequest::doMethodGet(passwd,ui->le_url->text().split(":").first()+":"+QString::number(basePort+1),ui->le_contract->text(),"getBalanceOf",GETADDR(passwd.pubkey).toHex());
+        QJsonArray jsonArr = HttpRequest::doMethodGet(passwd,ui->le_url->text().split(":").first()+":"+QString::number(basePort),ui->le_contract->text(),"getBalanceOf",GETADDR(passwd.pubkey).toHex());
         if(jsonArr.count()>0){
-            ui->lcd_onn->display(SETXF(jsonArr.at(0).toObject()["msg"].toDouble(),2));
+            ui->lcd_onn->display(SETXF(jsonArr.at(0).toObject()["msg"].toDouble(),4));
         }
         else
             BUG << "QJsonArray == null";
@@ -138,20 +138,20 @@ void MainWindow::onMessage(QJsonArray pArr){
         QJsonObject obj = pArr.at(i).toObject();
         if(obj["method"] == "transfer"){
             if(obj["owner"] == ui->lb_pubkey->text()){
-                ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),2));
+                ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),4));
             }
         }
         if(obj["method"] == "init"){
             if(obj["owner"] == ui->lb_pubkey->text()){
                 if(obj["symbol"] == "ONN")
-                    ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),2));
+                    ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),4));
             }
         }
     }
 }
 
 void MainWindow::on_ui_query_clicked(){
-    QByteArray result = HttpRequest::qtGet(QByteArray(QString(ui->le_url->text().split(":").first()+":"+QString::number(basePort+1)+"/block").toLatin1())+ui->le_querykey->text().toLatin1());
+    QByteArray result = HttpRequest::qtGet(QByteArray(QString(ui->le_url->text().split(":").first()+":"+QString::number(basePort)+"/block").toLatin1())+ui->le_querykey_contract->text().toLatin1()+"-"+ui->le_querykey_index->text().toLatin1());
     QList<QByteArray> data = result.split('@');
     ui->ui_databrowser->clear();
     if(data.count()>=5){
@@ -170,7 +170,7 @@ void MainWindow::on_pushButton_clicked(){
     arg.append(ui->le_addr->text());
     arg.append("?");
     arg.append(ui->le_number->text());
-    HttpRequest::doMethodSet(passwd,ui->le_url->text().split(":").first()+":"+QString::number(basePort+2),ui->le_contract->text(),"transfer",arg.toLatin1().toHex());
+    HttpRequest::doMethodSet(passwd,ui->le_url->text().split(":").first()+":"+QString::number(basePort),ui->le_contract->text(),"transfer",arg.toLatin1().toHex());
 }
 
 void MainWindow::on_pb_deploy_clicked(){
@@ -215,15 +215,15 @@ void MainWindow::on_radioButton_3_toggled(bool checked){
 }
 
 void MainWindow::on_pb_next_clicked(){
-    ui->le_querykey->setText(QString::number(ui->le_querykey->text().toInt()+1));
+    ui->le_querykey_index->setText(QString::number(ui->le_querykey_index->text().toInt()+1));
     on_ui_query_clicked();
 }
 
 void MainWindow::on_pb_prev_clicked(){
-    if(ui->le_querykey->text()=="0"){
+    if(ui->le_querykey_index->text()=="0"){
         return;
     }
-    ui->le_querykey->setText(QString::number(ui->le_querykey->text().toInt()-1));
+    ui->le_querykey_index->setText(QString::number(ui->le_querykey_index->text().toInt()-1));
     on_ui_query_clicked();
 }
 

@@ -30,7 +30,7 @@ public:
 
     static QByteArray qtGet(const QString &strUrl)
     {
-        BUG;
+        BUG << strUrl;
 
         const QUrl url = QUrl::fromUserInput(strUrl);
         QNetworkAccessManager m_qnam;
