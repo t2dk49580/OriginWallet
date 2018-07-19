@@ -106,7 +106,8 @@ public:
     static QByteArray doMethodSet(Password &psd,QString url,QString pContract,QString pMethod,QString pArg){
         QString block = docmd("method",psd.pubkey,psd.prikey,pContract,pMethod,pArg);
         BUG << url << block;
-        return qtGet(url+"/"+block);
+        //return qtGet(url+"/"+block);
+        return qtPost(url,block.toLatin1());
     }
 
     static QByteArray doDeploy(Password &psd,QString url,QString pContract,QString pCode,QString pArg){
