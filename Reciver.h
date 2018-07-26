@@ -18,8 +18,12 @@ public slots:
     void onText(QString);
     void onUpdBroad();
     void onUdpConn();
+    void onDisconn();
+    void onTimeout();
 private:
     QUdpSocket socketBroad;
+    bool mFlag;
+    QString mUrl;
 };
 
 #endif // RECIVER_H

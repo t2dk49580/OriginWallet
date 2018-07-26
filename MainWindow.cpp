@@ -140,8 +140,11 @@ void MainWindow::onMessage(QJsonArray pArr){
             if(obj["owner"] == ui->lb_pubkey->text()){
                 ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),4));
             }
-        }
-        if(obj["method"] == "init"){
+        }else if(obj["method"] == "getBalanceOf"){
+            if(obj["owner"] == ui->lb_pubkey->text()){
+                ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),4));
+            }
+        }else if(obj["method"] == "init"){
             if(obj["owner"] == ui->lb_pubkey->text()){
                 if(obj["symbol"] == "ONN")
                     ui->lcd_onn->display(SETXF(obj["msg"].toDouble(),4));
@@ -229,8 +232,12 @@ void MainWindow::on_pb_prev_clicked(){
 
 void MainWindow::on_pushButton_2_clicked(){
     QString code = ui->te_arg->toPlainText();
-    while((int)code.at(code.count()-1).toLatin1() <= 10){
-        code.remove(code.count()-1,1);
+    if(code.isEmpty()){
+        code = "null";
+    }else{
+        while((int)code.at(code.count()-1).toLatin1() <= 10){
+            code.remove(code.count()-1,1);
+        }
     }
     QString arg = code.toLatin1().toHex();
     if(ui->le_method->text().left(3)=="get"){
