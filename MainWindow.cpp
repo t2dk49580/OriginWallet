@@ -173,7 +173,7 @@ void MainWindow::on_pushButton_clicked(){
     arg.append(ui->le_addr->text());
     arg.append("?");
     arg.append(ui->le_number->text());
-    HttpRequest::doMethodSet(passwd,ui->le_url->text().split(":").first()+":"+QString::number(basePort),ui->le_contract->text(),"transfer",arg.toLatin1().toHex());
+    HttpRequest::doMethodSet(passwd,ui->le_url->text().split(":").first()+":"+ui->le_url->text().split(":").last(),ui->le_contract->text(),"transfer",arg.toLatin1().toHex());
 }
 
 void MainWindow::on_pb_deploy_clicked(){
