@@ -103,6 +103,15 @@ public:
         return jsonArr;
     }
 
+    static QJsonDocument doMethodGet1(Password &psd,QString url,QString pContract,QString pMethod,QString pArg){
+        QString block = pContract+"$"+pMethod+"$"+pArg+"$"+psd.pubkey;
+        BUG << block;
+        QByteArray result = qtGet(url+"/"+block);
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(result);
+        BUG << jsonDoc;
+        return jsonDoc;
+    }
+
     static QByteArray doMethodSet(Password &psd,QString url,QString pContract,QString pMethod,QString pArg){
         QString block = docmd("method",psd.pubkey,psd.prikey,pContract,pMethod,pArg);
         BUG << url << block;
@@ -111,8 +120,8 @@ public:
     }
 
     static QByteArray doDeploy(Password &psd,QString url,QString pContract,QString pCode,QString pArg){
-        BUG;
         QString block = docmd("deploy",psd.pubkey,psd.prikey,pContract,pCode,pArg);
+        BUG << url << block;
         return qtPost(url,block.toLatin1());
     }
 };

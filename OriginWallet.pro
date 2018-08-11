@@ -46,7 +46,8 @@ HEADERS += \
     emcc/asm_avr_mult_square.inc \
     emcc/curve-specific.inc \
     emcc/platform-specific.inc \
-    emcc/uECC_vli.h
+    emcc/uECC_vli.h \
+    HttpGet.h
 
 FORMS += \
         MainWindow.ui

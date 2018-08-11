@@ -12,7 +12,7 @@ public:
 
     QWebSocket ws;
 signals:
-    void toWindow(QJsonArray);
+    void toWindow(QJsonDocument);
 public slots:
     void onConn();
     void onText(QString);

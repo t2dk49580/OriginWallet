@@ -78,7 +78,7 @@ function transfer(pTo,pAmount)\n\
 end";
 
     rc = new Reciver(ui->le_url->text().split(":").first()+":"+QString::number(basePort+1));
-    QObject::connect(rc,SIGNAL(toWindow(QJsonArray)),this,SLOT(onMessage(QJsonArray)),Qt::QueuedConnection);
+    QObject::connect(rc,SIGNAL(toWindow(QJsonDocument)),this,SLOT(onMessage(QJsonDocument)),Qt::QueuedConnection);
     //ui->lbAccount->setStyleSheet("background-color:red");
     if(!passwd.hasAppkey()){
         setAppkey();
@@ -131,8 +131,9 @@ bool MainWindow::checkAppkey(){
     return false;
 }
 
-void MainWindow::onMessage(QJsonArray pArr){
-    QJsonDocument pDoc(pArr);
+void MainWindow::onMessage(QJsonDocument pJson){
+    QJsonDocument pDoc(pJson);
+    QJsonArray pArr = pDoc.array();
     ui->tb_network->append(QString(pDoc.toJson()).remove("\\"));
     for(int i=0;i<pArr.count();i++){
         QJsonObject obj = pArr.at(i).toObject();
@@ -241,8 +242,7 @@ void MainWindow::on_pushButton_2_clicked(){
     }
     QString arg = code.toLatin1().toHex();
     if(ui->le_method->text().left(3)=="get"){
-        auto pArr = HttpRequest::doMethodGet(passwd,ui->le_get_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
-        QJsonDocument pDoc(pArr);
+        auto pDoc = HttpRequest::doMethodGet1(passwd,ui->le_get_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
         ui->tb_network->append(QString(pDoc.toJson()).remove("\\"));
     }else{
         HttpRequest::doMethodSet(passwd,ui->le_set_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);

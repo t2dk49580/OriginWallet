@@ -26,7 +26,7 @@ public:
     bool checkAppkey();
 
 public slots:
-    void onMessage(QJsonArray);
+    void onMessage(QJsonDocument);
 
 private slots:
     void on_ui_query_clicked();

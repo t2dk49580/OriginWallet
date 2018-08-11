@@ -12,6 +12,7 @@ Reciver::Reciver(QString pUrl){
     connect(&socketBroad,SIGNAL(readyRead()),this,SLOT(onUpdBroad()),Qt::QueuedConnection);
     connect(timerRC,SIGNAL(timeout()),this,SLOT(onTimeout()),Qt::QueuedConnection);
     ws.open(QUrl(QString("ws://")+pUrl));
+    BUG << QString("ws://")+pUrl;
     timerRC->start(5000);
 }
 
@@ -53,9 +54,9 @@ void Reciver::onUdpConn(){
 
 void Reciver::onText(QString pMsg){
     QJsonDocument jsonDoc = QJsonDocument::fromJson(pMsg.toLatin1());
-    QJsonArray    jsonArr = jsonDoc.array();
-    BUG << jsonArr;
-    emit toWindow(jsonArr);
+    //QJsonArray    jsonArr = jsonDoc.array();
+    BUG << jsonDoc;
+    emit toWindow(jsonDoc);
 }
 
 void Reciver::onUpdBroad(){

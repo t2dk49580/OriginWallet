@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QUdpSocket>
 #include <QBuffer>
+#include "HttpGet.h"
 
 int main(int argc, char *argv[])
 {
