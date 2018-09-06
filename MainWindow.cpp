@@ -184,19 +184,11 @@ void MainWindow::on_pb_deploy_clicked(){
     while((int)code.at(code.count()-1).toLatin1() <= 10){
         code.remove(code.count()-1,1);
     }
-    if(code.left(contractHead.count()) != contractHead){
-        BUG << "do not edit front 3 line";
-        return;
-    }
-    code.remove(contractHead);
     if(code.contains("_G")){
         BUG << "do not use _G in custom program";
         return;
     }
-    if(code.contains("require")){
-        BUG << "do not use require in custom program";
-        return;
-    }
+    BUG << code;
     HttpRequest::doDeploy(passwd,ui->le_port->text()+"/deploy",ui->le_name->text(),code.toLatin1().toHex(),arg.toLatin1().toHex());
 }
 

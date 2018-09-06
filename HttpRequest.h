@@ -77,19 +77,20 @@ public:
         return replyData;
     }
 
-    static QString getTaget(QString type,QString pubkey,QString name,QString code,QString arg,QString sig) {
-        QString data = type + "$" + pubkey + "$" + name + "$" + code + "$" + arg;
+    static QString getTaget(QString type,QString pubkey,QString name,QString code,QString arg,QString pTime,QString sig) {
+        QString data = type + "$" + pubkey + "$" + name + "$" + code + "$" + arg + "$" + pTime;
         QString block = sig + "&" + data;
         return block;
     }
 
     static QString docmd(QString type,QString pubkey,QString prikey,QString name,QString func,QString arg) {
-        QString msg = type + "$" + pubkey + "$" + name + "$" + func + "$" + arg;
+        QString curTimeStamp = QString::number(QDateTime::currentMSecsSinceEpoch());
+        QString msg = type + "$" + pubkey + "$" + name + "$" + func + "$" + arg + "$" + curTimeStamp;
         QByteArray hash = GETSHA256(msg.toLatin1());
         sign(prikey.toLatin1().data(),hash.data());
         QByteArray sig = getSign();
         sig = sig.left(128);
-        QString block = getTaget(type, pubkey, name, func, arg, sig);
+        QString block = getTaget(type, pubkey, name, func, arg, curTimeStamp, sig);
         return block;
     }
 
