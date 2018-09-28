@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>9</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -814,6 +814,40 @@ p, li { white-space: pre-wrap; }
          <widget class="QTextEdit" name="make_le_data">
           <property name="placeholderText">
            <string>argument</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_9">
+       <attribute name="title">
+        <string>import</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="0" column="0">
+         <widget class="QTextEdit" name="te_import"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pb_import">
+          <property name="text">
+           <string>import</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_10">
+       <attribute name="title">
+        <string>export</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="0" column="0">
+         <widget class="QTextEdit" name="te_export"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pb_export">
+          <property name="text">
+           <string>export</string>
           </property>
          </widget>
         </item>

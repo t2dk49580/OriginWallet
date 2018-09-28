@@ -289,3 +289,15 @@ void MainWindow::on_pb_tohash_clicked(){
         ui->tb_tohash->append(GETSHA256(ui->te_tohash->toPlainText().toLatin1()));
     }
 }
+
+void MainWindow::on_pb_import_clicked(){
+    passwd.computePubkey(ui->te_import->toPlainText().toLatin1());
+    ui->lb_pubkey->setText(GETADDR(passwd.pubkey));
+    ui->te_import->clear();
+    ui->te_import->append(GETADDR(passwd.pubkey));
+}
+
+void MainWindow::on_pb_export_clicked(){
+    ui->te_export->clear();
+    ui->te_export->append(passwd.prikey);
+}
