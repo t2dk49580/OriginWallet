@@ -259,3 +259,26 @@ void MainWindow::on_pb_image_clicked(){
     imgData = imgbuffer.data().toHex();
     ui->tb_image->append(imgData);
 }
+
+void MainWindow::on_pb_tohex_clicked(){
+    ui->te_hex->clear();
+    ui->te_hex->append(ui->te_string->toPlainText().toLatin1().toHex());
+}
+
+void MainWindow::on_pb_sign_clicked(){
+    QString curResult;
+    if(ui->sign_cb_type->currentIndex()==0){
+        curResult = HttpRequest::doSignMethod(passwd,ui->sign_le_contract->text(),ui->sign_le_method->text(),ui->sign_te_arg->toPlainText().toLatin1().toHex());
+    }else if(ui->sign_cb_type->currentIndex()==1){
+        curResult = HttpRequest::doSignDeploy(passwd,ui->sign_le_contract->text(),ui->sign_le_method->text(),ui->sign_te_arg->toPlainText().toLatin1().toHex());
+    }
+    ui->sign_tb_result->clear();
+    ui->sign_tb_result->append(curResult);
+}
+
+void MainWindow::on_pb_make_clicked(){
+    QString curResult;
+    curResult = HttpRequest::doMake(passwd,ui->make_le_index->text(),ui->make_le_hashprv->text(),ui->make_le_data->toPlainText().toLatin1().toHex());
+    ui->make_tb_result->clear();
+    ui->make_tb_result->append(curResult);
+}

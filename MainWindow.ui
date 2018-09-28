@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -668,6 +668,125 @@ p, li { white-space: pre-wrap; }
         </item>
         <item row="1" column="0">
          <widget class="QTextBrowser" name="tb_image"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>tohex</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QTextEdit" name="te_string">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QTextBrowser" name="te_hex"/>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QPushButton" name="pb_tohex">
+          <property name="text">
+           <string>toHex</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_7">
+       <attribute name="title">
+        <string>sign</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="4" column="2" colspan="2">
+         <widget class="QPushButton" name="pb_make">
+          <property name="text">
+           <string>make</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="make_le_hashprv">
+          <property name="placeholderText">
+           <string>hash prev</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QTextBrowser" name="sign_tb_result">
+          <property name="placeholderText">
+           <string>result</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" colspan="2">
+         <widget class="QTextBrowser" name="make_tb_result">
+          <property name="placeholderText">
+           <string>result</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QTextEdit" name="sign_te_arg">
+          <property name="placeholderText">
+           <string>argument</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLineEdit" name="make_le_index">
+          <property name="placeholderText">
+           <string>index</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLineEdit" name="sign_le_contract">
+          <property name="placeholderText">
+           <string>contract</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QPushButton" name="pb_sign">
+          <property name="text">
+           <string>sign</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="sign_le_method">
+          <property name="placeholderText">
+           <string>function</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QComboBox" name="sign_cb_type">
+          <item>
+           <property name="text">
+            <string>method</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>deploy</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="2" rowspan="2" colspan="2">
+         <widget class="QTextEdit" name="make_le_data">
+          <property name="placeholderText">
+           <string>argument</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

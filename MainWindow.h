@@ -48,6 +48,12 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pb_image_clicked();
 
+    void on_pb_tohex_clicked();
+
+    void on_pb_sign_clicked();
+
+    void on_pb_make_clicked();
+
 private:
     int basePort;
     Ui::MainWindow *ui;

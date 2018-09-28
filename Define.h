@@ -23,7 +23,17 @@
 #define SETXF(A,B) QString("%1").arg(A, 0, 'f', B)
 
 #define GETMD5(A) QCryptographicHash::hash(A,QCryptographicHash::Md5).toHex()
-#define GETADDR(A) QCryptographicHash::hash(A,QCryptographicHash::Keccak_256).toHex().left(40)
+#define GETADDR(A) QCryptographicHash::hash(QByteArray::fromHex(A),QCryptographicHash::Keccak_256).toHex().right(40)
 #define GETSHA256(A) QCryptographicHash::hash(A,QCryptographicHash::Sha256).toHex()
+
+struct onnBlock {
+    QByteArray blockIndex;
+    QByteArray blockTimestamp;
+    QByteArray blockHashPrev;
+    QByteArray blockHash;
+    QByteArray blockData;
+    QByteArray blockMaker;
+    QByteArray blockMakerSign;
+};
 
 #endif // DEFINE_H

@@ -125,6 +125,51 @@ public:
         BUG << url << block;
         return qtPost(url,block.toLatin1());
     }
+
+    QByteArray getSignHash(Password &psd,QByteArray pHash){
+        sign(psd.prikey.data(),pHash.data());
+        return QByteArray(getSign()).left(128);
+    }
+
+    QByteArray calcHash(onnBlock pBlock){
+        return GETSHA256(pBlock.blockIndex+\
+                                  pBlock.blockTimestamp+\
+                                  pBlock.blockHashPrev+\
+                                  pBlock.blockData+\
+                                  pBlock.blockMaker).toHex();
+    }
+
+    static QByteArray toString(onnBlock pBlock){
+        return pBlock.blockIndex+"@"+pBlock.blockTimestamp+"@"+pBlock.blockHashPrev+"@"+pBlock.blockHash\
+                +"@"+pBlock.blockData+"@"+pBlock.blockMaker+"@"+pBlock.blockMakerSign;
+    }
+
+    static QByteArray doSignMethod(Password &psd,QString pContract,QString pMethod,QString pArg){
+        QString block = docmd("method",psd.pubkey,psd.prikey,pContract,pMethod,pArg);
+        return block.toLatin1();
+    }
+
+    static QByteArray doSignDeploy(Password &psd,QString pContract,QString pMethod,QString pArg){
+        QString block = docmd("deploy",psd.pubkey,psd.prikey,pContract,pMethod,pArg);
+        return block.toLatin1();
+    }
+
+    static QByteArray doMake(Password &psd,QString pIndex,QString pHashPrev,QString pData){
+        onnBlock curBlock;
+        curBlock.blockIndex = pIndex.toLatin1();
+        curBlock.blockTimestamp = QByteArray::number(QDateTime::currentMSecsSinceEpoch());//QDateTime::currentMSecsSinceEpoch()
+        curBlock.blockHashPrev = pHashPrev.toLatin1();
+        curBlock.blockData = pData.toLatin1();
+        curBlock.blockMaker = psd.pubkey;
+        curBlock.blockHash = GETSHA256(curBlock.blockIndex+\
+                                       curBlock.blockTimestamp+\
+                                       curBlock.blockHashPrev+\
+                                       curBlock.blockData+\
+                                       curBlock.blockMaker).toHex();
+        sign(psd.prikey.data(),curBlock.blockHash.data());
+        curBlock.blockMakerSign = QByteArray(getSign()).left(128);
+        return toString(curBlock);
+    }
 };
 
 class BlockBroadcast : public QObject {
