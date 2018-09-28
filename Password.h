@@ -45,7 +45,7 @@ public:
         pubkey = getPublicKey();
         prikey = getPrivateKey();
         prikey = prikey.left(64);   //need use AES
-
+        pubkey = computePubkey(prikey);
         setting->setValue("pubkey",pubkey);
         setting->setValue("prikey",prikey);
     }
@@ -54,7 +54,7 @@ public:
         uint8_t pp[65] = {0};
         uECC_compute_public_key((uint8_t *)QByteArray::fromHex(pPri).data(),pp,uECC_secp256k1());
         QByteArray final = (char *)pp;
-        pubkey = final.toHex();
+        pubkey = final.left(64).toHex();
         prikey = pPri;
         setting->setValue("pubkey",pubkey);
         setting->setValue("prikey",prikey);
