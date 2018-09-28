@@ -278,7 +278,7 @@ void MainWindow::on_pb_sign_clicked(){
 
 void MainWindow::on_pb_make_clicked(){
     QString curResult;
-    curResult = HttpRequest::doMake(passwd,ui->make_le_index->text(),ui->make_le_hashprv->text(),ui->make_le_data->toPlainText().toLatin1().toHex());
+    curResult = HttpRequest::doMake(passwd,ui->make_le_index->text(),ui->make_le_hashprv->text(),ui->make_le_data->toPlainText().toLatin1());
     ui->make_tb_result->clear();
     ui->make_tb_result->append(curResult);
 }
