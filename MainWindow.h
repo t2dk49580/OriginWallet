@@ -60,6 +60,8 @@ private slots:
 
     void on_pb_export_clicked();
 
+    void on_pb_toasc_clicked();
+
 private:
     int basePort;
     Ui::MainWindow *ui;

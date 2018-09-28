@@ -301,3 +301,8 @@ void MainWindow::on_pb_export_clicked(){
     ui->te_export->clear();
     ui->te_export->append(passwd.prikey);
 }
+
+void MainWindow::on_pb_toasc_clicked(){
+    ui->tb_toasc->clear();
+    ui->tb_toasc->append(QByteArray::fromHex(ui->te_toasc->toPlainText().toLatin1()));
+}

@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>9</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -742,6 +742,9 @@ p, li { white-space: pre-wrap; }
         </item>
         <item row="0" column="3">
          <widget class="QLineEdit" name="make_le_hashprv">
+          <property name="maxLength">
+           <number>64</number>
+          </property>
           <property name="placeholderText">
            <string>hash prev</string>
           </property>
@@ -791,6 +794,9 @@ p, li { white-space: pre-wrap; }
         </item>
         <item row="0" column="1">
          <widget class="QLineEdit" name="sign_le_method">
+          <property name="maxLength">
+           <number>327670</number>
+          </property>
           <property name="placeholderText">
            <string>function</string>
           </property>
@@ -848,6 +854,26 @@ p, li { white-space: pre-wrap; }
          <widget class="QPushButton" name="pb_export">
           <property name="text">
            <string>export</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_11">
+       <attribute name="title">
+        <string>toasc</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_12">
+        <item row="0" column="0">
+         <widget class="QTextEdit" name="te_toasc"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTextBrowser" name="tb_toasc"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pb_toasc">
+          <property name="text">
+           <string>toasc</string>
           </property>
          </widget>
         </item>
