@@ -282,3 +282,10 @@ void MainWindow::on_pb_make_clicked(){
     ui->make_tb_result->clear();
     ui->make_tb_result->append(curResult);
 }
+
+void MainWindow::on_pb_tohash_clicked(){
+    if(ui->cb_tohash->currentIndex()==0){
+        ui->tb_tohash->clear();
+        ui->tb_tohash->append(GETSHA256(ui->te_tohash->toPlainText().toLatin1()));
+    }
+}

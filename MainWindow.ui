@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -694,6 +694,35 @@ p, li { white-space: pre-wrap; }
          <widget class="QPushButton" name="pb_tohex">
           <property name="text">
            <string>toHex</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_8">
+       <attribute name="title">
+        <string>tohash</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="0" column="0">
+         <widget class="QComboBox" name="cb_tohash">
+          <item>
+           <property name="text">
+            <string>sha256</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTextEdit" name="te_tohash"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QTextBrowser" name="tb_tohash"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="pb_tohash">
+          <property name="text">
+           <string>tohash</string>
           </property>
          </widget>
         </item>

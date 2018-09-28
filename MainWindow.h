@@ -54,6 +54,8 @@ private slots:
 
     void on_pb_make_clicked();
 
+    void on_pb_tohash_clicked();
+
 private:
     int basePort;
     Ui::MainWindow *ui;
