@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -220,11 +220,20 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
+         <widget class="QSplitter" name="splitter">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QWidget" name="">
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <widget class="QLabel" name="label">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>index</string>
               </property>
@@ -232,6 +241,12 @@
             </item>
             <item>
              <widget class="QLabel" name="label_2">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>preHash</string>
               </property>
@@ -239,6 +254,12 @@
             </item>
             <item>
              <widget class="QLabel" name="label_3">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>curHash</string>
               </property>
@@ -246,14 +267,124 @@
             </item>
             <item>
              <widget class="QLabel" name="label_4">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>timestamp</string>
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QLabel" name="label_16">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>sign</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_17">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>user</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_18">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>maker</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_22">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>maker sign</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_23">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>contract</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_19">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>type</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_20">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>function</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_21">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>arg</string>
+              </property>
+             </widget>
+            </item>
            </layout>
-          </item>
-          <item>
+          </widget>
+          <widget class="QWidget" name="">
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
              <widget class="QLabel" name="ui_index">
@@ -283,16 +414,87 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QLabel" name="lb_sign">
+              <property name="text">
+               <string>0x1234</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_user">
+              <property name="text">
+               <string>user</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_maker">
+              <property name="text">
+               <string>maker</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_makersign">
+              <property name="text">
+               <string>maker sign</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_contract">
+              <property name="text">
+               <string>contract</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_type">
+              <property name="text">
+               <string>type</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_function">
+              <property name="maximumSize">
+               <size>
+                <width>500</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>function</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_arg">
+              <property name="text">
+               <string>argument</string>
+              </property>
+             </widget>
+            </item>
            </layout>
-          </item>
-         </layout>
+          </widget>
+         </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="0">
+         <widget class="QTextBrowser" name="ui_databrowser"/>
+        </item>
+        <item row="2" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_15">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
              <widget class="QLineEdit" name="le_querykey_contract">
+              <property name="maximumSize">
+               <size>
+                <width>20000</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>0</string>
               </property>
@@ -300,6 +502,12 @@
             </item>
             <item>
              <widget class="QLineEdit" name="le_querykey_index">
+              <property name="maximumSize">
+               <size>
+                <width>20000</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>0</string>
               </property>
@@ -361,9 +569,6 @@
            </layout>
           </item>
          </layout>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QTextBrowser" name="ui_databrowser"/>
         </item>
        </layout>
       </widget>
@@ -709,6 +914,11 @@ p, li { white-space: pre-wrap; }
           <item>
            <property name="text">
             <string>sha256</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address</string>
            </property>
           </item>
          </widget>

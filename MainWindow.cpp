@@ -154,8 +154,25 @@ void MainWindow::onMessage(QJsonDocument pJson){
     }
 }
 
+static onnBlock createBlock(QByteArray pData){
+    onnBlock curBlock;
+    QList<QByteArray> data = pData.split('@');
+    if(data.count()<7)
+        return curBlock;
+    curBlock.blockIndex = data.at(0);
+    curBlock.blockTimestamp = data.at(1);
+    curBlock.blockHashPrev = data.at(2);
+    curBlock.blockHash = data.at(3);
+    curBlock.blockData = data.at(4);
+    curBlock.blockMaker = data.at(5);
+    curBlock.blockMakerSign = data.at(6);
+    return curBlock;
+}
+
 void MainWindow::on_ui_query_clicked(){
     QByteArray result = HttpRequest::qtGet(QByteArray(QString(ui->le_url->text().split(":").first()+":"+QString::number(basePort)+"/block").toLatin1())+ui->le_querykey_contract->text().toLatin1()+"-"+ui->le_querykey_index->text().toLatin1());
+    onnBlock curBlock = createBlock(result);
+    QByteArray curData = curBlock.blockData;
     QList<QByteArray> data = result.split('@');
     ui->ui_databrowser->clear();
     if(data.count()>=5){
@@ -164,6 +181,33 @@ void MainWindow::on_ui_query_clicked(){
         ui->ui_curhash->setText(data.at(3));
         ui->ui_timestamp->setText(data.at(1));
         ui->ui_databrowser->setText(data.at(4));
+
+        QList<QByteArray> listCmd = curData.split('&');
+        if(listCmd.count()<2){
+            BUG << "bad data: listCmd.count()<2";
+            return;
+        }
+        QByteArray sign = listCmd.at(0);
+        QByteArray data1 = listCmd.at(1);
+        QList<QByteArray> listData = data1.split('$');
+
+        QByteArray type = listData.at(0);
+        QByteArray pubkey = GETADDR(listData.at(1));
+        QByteArray name = listData.at(2);
+        QByteArray code = listData.at(3);
+        QByteArray arg = QByteArray::fromHex(listData.at(4));
+        QByteArray maker = GETADDR(curBlock.blockMaker);
+        QByteArray makerSign = curBlock.blockMakerSign;
+
+        ui->lb_arg->setText(arg);
+        ui->lb_contract->setText(name);
+        ui->lb_function->setText(code);
+        ui->lb_user->setText(pubkey);
+        ui->lb_maker->setText(maker);
+        ui->lb_makersign->setText(makerSign);
+        ui->lb_type->setText(type);
+        ui->lb_sign->setText(sign);
+
     }else{
         ui->ui_databrowser->setText(result);
     }
@@ -284,9 +328,11 @@ void MainWindow::on_pb_make_clicked(){
 }
 
 void MainWindow::on_pb_tohash_clicked(){
+    ui->tb_tohash->clear();
     if(ui->cb_tohash->currentIndex()==0){
-        ui->tb_tohash->clear();
         ui->tb_tohash->append(GETSHA256(ui->te_tohash->toPlainText().toLatin1()));
+    }else if(ui->cb_tohash->currentIndex()==1){
+        ui->tb_tohash->append(GETADDR(ui->te_tohash->toPlainText().toLatin1()));
     }
 }
 
