@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>789</width>
+    <width>871</width>
     <height>600</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>11</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1089,6 +1089,61 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_12">
+       <attribute name="title">
+        <string>request</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_13">
+        <item row="0" column="0">
+         <widget class="QLineEdit" name="le_geturl_req">
+          <property name="placeholderText">
+           <string>URL</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="le_geturi_req">
+          <property name="placeholderText">
+           <string>URI</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pb_get_req">
+          <property name="text">
+           <string>GET</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="le_posturl_req">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>URL</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="le_posturi_req">
+          <property name="placeholderText">
+           <string>URI</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="pb_post_req">
+          <property name="text">
+           <string>POST</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QTextBrowser" name="tb_req"/>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -1098,7 +1153,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>789</width>
+     <width>871</width>
      <height>28</height>
     </rect>
    </property>

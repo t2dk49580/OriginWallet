@@ -1,0 +1,10 @@
+#!/bin/bash
+
+HLINE=`find . -name '*.h' |xargs wc -l|tail -1|awk '{ print $1 }'`
+CLINE=`find . -name '*.c' |xargs wc -l|tail -1|awk '{ print $1 }'`
+LLINE=`find . -name '*.lua' |xargs wc -l|tail -1|awk '{ print $1 }'`
+HPPLINE=`find . -name '*.hpp' |xargs wc -l|tail -1|awk '{ print $1 }'`
+CPPLINE=`find . -name '*.cpp' |xargs wc -l|tail -1|awk '{ print $1 }'`
+UILINE=`find . -name '*.ui' |xargs wc -l|tail -1|awk '{ print $1 }'`
+QRCLINE=`find . -name '*.qrc' |xargs wc -l|tail -1|awk '{ print $1 }'`
+echo $((HLINE+CLINE+LLINE+HPPLINE+CPPLINE+UILINE+QRCLINE))

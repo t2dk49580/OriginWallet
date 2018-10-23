@@ -23,6 +23,48 @@
 
 using namespace std;
 
+class NetRequest : public QThread {
+    Q_OBJECT
+public:
+    NetRequest(){
+        CONN(this,SIGNAL(started()),this,SLOT(onStart()));
+    }
+    ~NetRequest(){}
+
+signals:
+    void doRsponse(QString);
+public slots:
+    void onStart(){
+        mNetGet = new QNetworkAccessManager();
+        mNetPost = new QNetworkAccessManager();
+        connect(mNetGet, SIGNAL(finished(QNetworkReply*)),
+                this, SLOT(onFinish(QNetworkReply*)),Qt::QueuedConnection);
+        connect(mNetPost, SIGNAL(finished(QNetworkReply*)),
+                this, SLOT(onFinish(QNetworkReply*)),Qt::QueuedConnection);
+    }
+    void onGet(QString pUrl,QString pData){
+        cout << (pUrl+"/"+pData).toLatin1().data() << endl;
+        mNetGet->get(QNetworkRequest(pUrl+"/"+pData));
+    }
+    void onPost(QString pUrl,QString pData){
+        QNetworkRequest qnr(pUrl);
+        qnr.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
+        mNetPost->post(qnr,pData.toLatin1());
+    }
+    void onFinish(QNetworkReply *pReply){
+        QByteArray data = pReply->readAll();
+        BUG << QTime::currentTime().toString("ss zzz") << data << endl;
+        emit doRsponse(data);
+        //pReply->deleteLater();
+        delete pReply;
+        pReply = Q_NULLPTR;
+    }
+
+private:
+    QNetworkAccessManager *mNetGet;
+    QNetworkAccessManager *mNetPost;
+};
+
 class HttpRequest {
 public:
     HttpRequest(){}

@@ -25,8 +25,13 @@ public:
     QString getInput(QString);
     bool checkAppkey();
 
+signals:
+    void toGet(QString,QString);
+    void toPost(QString,QString);
+
 public slots:
     void onMessage(QJsonDocument);
+    void onRsponse(QString);
 
 private slots:
     void on_ui_query_clicked();
@@ -62,6 +67,10 @@ private slots:
 
     void on_pb_toasc_clicked();
 
+    void on_pb_get_req_clicked();
+
+    void on_pb_post_req_clicked();
+
 private:
     int basePort;
     Ui::MainWindow *ui;
@@ -70,6 +79,7 @@ private:
     QString contractHead;
     QString contractBase;
     QString contractErc20;
+    NetRequest *req;
 };
 
 #endif // MAINWINDOW_H

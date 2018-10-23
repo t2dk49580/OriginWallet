@@ -3,6 +3,11 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
+    req = new NetRequest();
+    req->start();
+    CONN(this,SIGNAL(toGet(QString,QString)),req,SLOT(onGet(QString,QString)));
+    CONN(this,SIGNAL(toPost(QString,QString)),req,SLOT(onPost(QString,QString)));
+    CONN(req,SIGNAL(doRsponse(QString)),this,SLOT(onRsponse(QString)));
     basePort = ui->le_url->text().split(":").last().toInt();
     contractHead = "_G['os'] = nil\n_G['io'] = nil\njson = require 'json'\n";
     contractBase = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\nfunction init()\nend\n";
@@ -351,4 +356,17 @@ void MainWindow::on_pb_export_clicked(){
 void MainWindow::on_pb_toasc_clicked(){
     ui->tb_toasc->clear();
     ui->tb_toasc->append(QByteArray::fromHex(ui->te_toasc->toPlainText().toLatin1()));
+}
+
+void MainWindow::on_pb_get_req_clicked(){
+    emit toGet(ui->le_geturl_req->text(),ui->le_geturi_req->text());
+}
+
+void MainWindow::on_pb_post_req_clicked(){
+    emit toPost(ui->le_posturl_req->text(),ui->le_posturi_req->text());
+}
+
+void MainWindow::onRsponse(QString pData){
+    ui->tb_req->clear();
+    ui->tb_req->append(pData);
 }
