@@ -1,6 +1,8 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+QString nodeip = "http://47.75.190.195:3000";
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
     req = new NetRequest();
@@ -8,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     CONN(this,SIGNAL(toGet(QString,QString)),req,SLOT(onGet(QString,QString)));
     CONN(this,SIGNAL(toPost(QString,QString)),req,SLOT(onPost(QString,QString)));
     CONN(req,SIGNAL(doRsponse(QString)),this,SLOT(onRsponse(QString)));
-    basePort = ui->le_url->text().split(":").last().toInt();
+    basePort = nodeip.split(":").last().toInt();
     contractHead = "_G['os'] = nil\n_G['io'] = nil\njson = require 'json'\n";
     contractBase = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\nfunction init()\nend\n";
     //contractErc20 = contractHead+"gUser = nil\nfunction setUser(pUser)\ngUser = pUser\nend\ngName = 'Zero Erc20 Template'\ngSymbol = 'ZET'\ngOwner = nil\ngTotalSupply = 0\ngBalance = {}\nfunction _toJson(pKey,pVar)\n	return json.encode({f=pKey,v=pVar,u=gUser})\nend\n\nfunction init(pTotal)\n	if gOwner ~= nil then\n		return toJson('init','fail: it was init')\n	end\n	gTotalSupply = pTotal\n	gOwner = gUser\n	gBalance[gOwner] = tonumber(pTotal)\n	return _toJson('init','init finish')\nend\n\nfunction getBalanceOf(pUser)\n	if gBalance[pUser] == nil then\n		return _toJson('balanceOf',0)\n	end\n	return _toJson('balanceOf',gBalance[pUser])\nend\n\nfunction transfer(pTo,pAmount)\n	if gBalance[gUser] == nil then\n		return _toJson('transfer','sender not found')\n	end\n	if gBalance[pTo] == nil then\n		gBalance[pTo] = 0\n	end\n	local curAmount = tonumber(pAmount)\n	if curAmount <= 0 then\n		return _toJson('transfer','curAmount <= 0')\n	end\n	if gBalance[gUser] < curAmount then\n		return _toJson('transfer','sender amount not enough')\n	end\n	gBalance[gUser] = gBalance[gUser] - curAmount\n	gBalance[pTo] = gBalance[pTo] + curAmount\n	return json.encode({sender=gUser,senderBalance=gBalance[gUser],reciver=pTo,reciverBlance=gBalance[pTo]})\nend";
@@ -82,7 +84,7 @@ function transfer(pTo,pAmount)\n\
     return json.encode(curResult)\n\
 end";
 
-    rc = new Reciver(ui->le_url->text().split(":").first()+":"+QString::number(basePort+1));
+    rc = new Reciver(nodeip.split(":").first()+":"+QString::number(basePort+1));
     QObject::connect(rc,SIGNAL(toWindow(QJsonDocument)),this,SLOT(onMessage(QJsonDocument)),Qt::QueuedConnection);
     //ui->lbAccount->setStyleSheet("background-color:red");
     if(!passwd.hasAppkey()){
@@ -90,7 +92,7 @@ end";
     }else{
         if(!checkAppkey())
             exit(-1);
-        QJsonArray jsonArr = HttpRequest::doMethodGet(passwd,ui->le_url->text().split(":").first()+":"+QString::number(basePort),ui->le_contract->text(),"getBalanceOf",GETADDR(passwd.pubkey).toHex());
+        QJsonArray jsonArr;// = HttpRequest::doMethodGet(passwd,nodeip,ui->le_contract->text(),"getBalanceOf",GETADDR(passwd.pubkey).toHex());
         if(jsonArr.count()>0){
             ui->lcd_onn->display(SETXF(jsonArr.at(0).toObject()["msg"].toDouble(),4));
         }
@@ -102,6 +104,19 @@ end";
     ui->lb_pubkey->setText(GETADDR(passwd.pubkey));
     ui->le_addr->setText(GETADDR(passwd.pubkey));
     ui->te_code->setText(contractBase);
+
+    ui->le_geturl_req->setText(doLoad("geturl0"));
+    ui->le_geturi_req->setText(doLoad("geturi0"));
+
+    ui->le_posturl_req->setText(doLoad("posturl0"));
+    ui->le_posturl_req_2->setText(doLoad("posturl1"));
+    ui->le_posturl_req_3->setText(doLoad("posturl2"));
+    ui->le_posturl_req_4->setText(doLoad("posturl3"));
+
+    ui->le_posturi_req->setText(doLoad("posturi0"));
+    ui->le_posturi_req_2->setText(doLoad("posturi1"));
+    ui->le_posturi_req_3->setText(doLoad("posturi2"));
+    ui->le_posturi_req_4->setText(doLoad("posturi3"));
 }
 
 MainWindow::~MainWindow(){
@@ -175,7 +190,7 @@ static onnBlock createBlock(QByteArray pData){
 }
 
 void MainWindow::on_ui_query_clicked(){
-    QByteArray result = HttpRequest::qtGet(QByteArray(QString(ui->le_url->text().split(":").first()+":"+QString::number(basePort)+"/block").toLatin1())+ui->le_querykey_contract->text().toLatin1()+"-"+ui->le_querykey_index->text().toLatin1());
+    QByteArray result = HttpRequest::qtGet(QByteArray(QString(nodeip.split(":").first()+":"+QString::number(basePort)+"/block").toLatin1())+ui->le_querykey_contract->text().toLatin1()+"-"+ui->le_querykey_index->text().toLatin1());
     onnBlock curBlock = createBlock(result);
     QByteArray curData = curBlock.blockData;
     QList<QByteArray> data = result.split('@');
@@ -223,7 +238,7 @@ void MainWindow::on_pushButton_clicked(){
     arg.append(ui->le_addr->text());
     arg.append("?");
     arg.append(ui->le_number->text());
-    HttpRequest::doMethodSet(passwd,ui->le_url->text().split(":").first()+":"+ui->le_url->text().split(":").last(),ui->le_contract->text(),"transfer",arg.toLatin1().toHex());
+    HttpRequest::doMethodSet(passwd,nodeip.split(":").first()+":"+nodeip.split(":").last(),ui->le_contract->text(),"transfer",arg.toLatin1().toHex());
 }
 
 void MainWindow::on_pb_deploy_clicked(){
@@ -238,7 +253,7 @@ void MainWindow::on_pb_deploy_clicked(){
         return;
     }
     BUG << code;
-    HttpRequest::doDeploy(passwd,ui->le_port->text()+"/deploy",ui->le_name->text(),code.toLatin1().toHex(),arg.toLatin1().toHex());
+    HttpRequest::doDeploy(passwd,nodeip+"/deploy",ui->le_name->text(),code.toLatin1().toHex(),arg.toLatin1().toHex());
 }
 
 void MainWindow::on_te_code_textChanged(){
@@ -283,10 +298,10 @@ void MainWindow::on_pushButton_2_clicked(){
     }
     QString arg = code.toLatin1().toHex();
     if(ui->le_method->text().left(3)=="get"){
-        auto pDoc = HttpRequest::doMethodGet1(passwd,ui->le_get_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
+        auto pDoc = HttpRequest::doMethodGet1(passwd,nodeip,ui->le_method_contract->text(),ui->le_method->text(),arg);
         ui->tb_network->append(QString(pDoc.toJson()).remove("\\"));
     }else{
-        HttpRequest::doMethodSet(passwd,ui->le_set_url->text(),ui->le_method_contract->text(),ui->le_method->text(),arg);
+        HttpRequest::doMethodSet(passwd,nodeip,ui->le_method_contract->text(),ui->le_method->text(),arg);
     }
 }
 
@@ -338,6 +353,11 @@ void MainWindow::on_pb_tohash_clicked(){
         ui->tb_tohash->append(GETSHA256(ui->te_tohash->toPlainText().toLatin1()));
     }else if(ui->cb_tohash->currentIndex()==1){
         ui->tb_tohash->append(GETADDR(ui->te_tohash->toPlainText().toLatin1()));
+    }else if(ui->cb_tohash->currentIndex()==2){
+        uint8_t pp[65] = {0};
+        uECC_compute_public_key((uint8_t *)QByteArray::fromHex(ui->te_tohash->toPlainText().toLatin1()).data(),pp,uECC_secp256k1());
+        QByteArray final = (char *)pp;
+        ui->tb_tohash->append(final.left(64).toHex());
     }
 }
 
@@ -358,15 +378,55 @@ void MainWindow::on_pb_toasc_clicked(){
     ui->tb_toasc->append(QByteArray::fromHex(ui->te_toasc->toPlainText().toLatin1()));
 }
 
+void MainWindow::doSave(QString pKey,QString pVar){
+    QSettings curSet("request.ini",QSettings::IniFormat);
+    curSet.setValue(pKey,pVar);
+}
+QString MainWindow::doLoad(QString pKey){
+    QSettings curSet("request.ini",QSettings::IniFormat);
+    return curSet.value(pKey).toString();
+}
+
 void MainWindow::on_pb_get_req_clicked(){
+    doSave("geturl0",ui->le_geturl_req->text());
+    doSave("geturi0",ui->le_geturi_req->text());
     emit toGet(ui->le_geturl_req->text(),ui->le_geturi_req->text());
 }
 
 void MainWindow::on_pb_post_req_clicked(){
-    emit toPost(ui->le_posturl_req->text(),ui->le_posturi_req->text());
+    doSave("posturl0",ui->le_posturl_req->text());
+    doSave("posturi0",ui->le_posturi_req->text());
+    doPost(ui->le_posturl_req->text(),ui->le_posturi_req->text());
+}
+
+void MainWindow::on_pb_post_req_2_clicked(){
+    doSave("posturl1",ui->le_posturl_req_2->text());
+    doSave("posturi1",ui->le_posturi_req_2->text());
+    doPost(ui->le_posturl_req_2->text(),ui->le_posturi_req_2->text());
+}
+
+void MainWindow::on_pb_post_req_3_clicked(){
+    doSave("posturl2",ui->le_posturl_req_3->text());
+    doSave("posturi2",ui->le_posturi_req_3->text());
+    doPost(ui->le_posturl_req_3->text(),ui->le_posturi_req_3->text());
+}
+
+void MainWindow::on_pb_post_req_4_clicked(){
+    doSave("posturl3",ui->le_posturl_req_4->text());
+    doSave("posturi3",ui->le_posturi_req_4->text());
+    doPost(ui->le_posturl_req_4->text(),ui->le_posturi_req_4->text());
+}
+
+void MainWindow::doPost(QString pUrl,QString pUri){
+    emit toPost(pUrl,pUri);
 }
 
 void MainWindow::onRsponse(QString pData){
     ui->tb_req->clear();
     ui->tb_req->append(pData);
 }
+
+
+
+
+

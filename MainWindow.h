@@ -24,6 +24,9 @@ public:
     void setAppkey();
     QString getInput(QString);
     bool checkAppkey();
+    void doSave(QString,QString);
+    QString doLoad(QString);
+    void doPost(QString,QString);
 
 signals:
     void toGet(QString,QString);
@@ -70,6 +73,12 @@ private slots:
     void on_pb_get_req_clicked();
 
     void on_pb_post_req_clicked();
+
+    void on_pb_post_req_2_clicked();
+
+    void on_pb_post_req_3_clicked();
+
+    void on_pb_post_req_4_clicked();
 
 private:
     int basePort;
