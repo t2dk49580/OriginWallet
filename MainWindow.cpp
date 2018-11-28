@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     req = new NetRequest();
     req->start();
-    CONN(this,SIGNAL(toGet(QString,QString)),req,SLOT(onGet(QString,QString)));
+    CONN(this,SIGNAL(toGet(QString)),req,SLOT(onGet(QString)));
     CONN(this,SIGNAL(toPost(QString,QString)),req,SLOT(onPost(QString,QString)));
     CONN(req,SIGNAL(doRsponse(QString)),this,SLOT(onRsponse(QString)));
     basePort = nodeip.split(":").last().toInt();
@@ -106,7 +106,6 @@ end";
     ui->te_code->setText(contractBase);
 
     ui->le_geturl_req->setText(doLoad("geturl0"));
-    ui->le_geturi_req->setText(doLoad("geturi0"));
 
     ui->le_posturl_req->setText(doLoad("posturl0"));
     ui->le_posturl_req_2->setText(doLoad("posturl1"));
@@ -389,8 +388,7 @@ QString MainWindow::doLoad(QString pKey){
 
 void MainWindow::on_pb_get_req_clicked(){
     doSave("geturl0",ui->le_geturl_req->text());
-    doSave("geturi0",ui->le_geturi_req->text());
-    emit toGet(ui->le_geturl_req->text(),ui->le_geturi_req->text());
+    emit toGet(ui->le_geturl_req->text());
 }
 
 void MainWindow::on_pb_post_req_clicked(){

@@ -29,7 +29,7 @@ public:
     void doPost(QString,QString);
 
 signals:
-    void toGet(QString,QString);
+    void toGet(QString);
     void toPost(QString,QString);
 
 public slots:

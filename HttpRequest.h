@@ -42,9 +42,9 @@ public slots:
         connect(mNetPost, SIGNAL(finished(QNetworkReply*)),
                 this, SLOT(onFinish(QNetworkReply*)),Qt::QueuedConnection);
     }
-    void onGet(QString pUrl,QString pData){
-        cout << (pUrl+"/"+pData).toLatin1().data() << endl;
-        mNetGet->get(QNetworkRequest(pUrl+"/"+pData));
+    void onGet(QString pUrl){
+        cout << (pUrl).toLatin1().data() << endl;
+        mNetGet->get(QNetworkRequest(pUrl));
     }
     void onPost(QString pUrl,QString pData){
         QNetworkRequest qnr(pUrl);
