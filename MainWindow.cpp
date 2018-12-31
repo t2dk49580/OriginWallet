@@ -4,6 +4,12 @@
 QString nodeip = "http://47.75.190.195:3000";
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
+    nodeip = doLoad("ip")+":"+doLoad("port");
+    if(nodeip==":"){
+        doSave("ip","http://47.75.190.195");
+        doSave("port","3000");
+        nodeip = "http://47.75.190.195:3000";
+    }
     ui->setupUi(this);
     req = new NetRequest();
     req->start();
@@ -83,8 +89,11 @@ function transfer(pTo,pAmount)\n\
     _addResult(pTo,'transfer',true,gBalance[pTo],curResult)\n\
     return json.encode(curResult)\n\
 end";
-
-    rc = new Reciver(nodeip.split(":").first()+":"+QString::number(basePort+1));
+    QString wsport = doLoad("wsport");
+    if(wsport.isEmpty()){
+        doSave("wsport","3001");
+    }
+    rc = new Reciver(doLoad("ip")+":"+doLoad("wsport"));
     QObject::connect(rc,SIGNAL(toWindow(QJsonDocument)),this,SLOT(onMessage(QJsonDocument)),Qt::QueuedConnection);
     //ui->lbAccount->setStyleSheet("background-color:red");
     if(!passwd.hasAppkey()){
